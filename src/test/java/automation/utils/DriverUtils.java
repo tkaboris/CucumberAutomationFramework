@@ -3,6 +3,7 @@ package automation.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -15,16 +16,16 @@ public class DriverUtils {
 
     static WebDriver driver;
 
-    public static void createDriver(){
+    public static void createDriver() {
         System.setProperty("webdriver.chrome.driver", "src//test//resources//driver//chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 
         driver.manage().window().maximize();
     }
 
-    public static void createSauceDriver(){
+    public static void createSauceDriver() {
         // Steps/hooks and update to use craeteSauceDriver in setup
 
         ChromeOptions options = new ChromeOptions();
@@ -48,7 +49,24 @@ public class DriverUtils {
         driver = new RemoteWebDriver(url, options);
     }
 
-    public static WebDriver getDriver(){
+    public static void createBrowserStackDriver() {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("os_version", "10");
+        caps.setCapability("resolution", "1920x1080");
+        caps.setCapability("browser", "Chrome");
+        caps.setCapability("browser_version", "97.0");
+        caps.setCapability("os", "Windows");
+        caps.setCapability("name", "My first test"); // test name
+        caps.setCapability("build", "BStack Build Number 1"); // CI/CD job or build name
+        try {
+            driver = new RemoteWebDriver(new URL(URL), caps);
+            //final WebDriver driver = new RemoteWebDriver(new URL("\"https://chiraq:\" + password +\"@hub-cloud.browserstack.comm), caps);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static WebDriver getDriver() {
         return driver;
     }
 

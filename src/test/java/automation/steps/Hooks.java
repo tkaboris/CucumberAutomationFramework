@@ -16,7 +16,7 @@ public class Hooks {
         }else if(PropertyReader.getProperty("platform").equals("sauce")){
             DriverUtils.createSauceDriver();
         }else if(PropertyReader.getProperty("platform").equals("browserstack")) {
-            DriverUtils.createSauceDriver();
+            DriverUtils.createBrowserStackDriver();
         }else{
             throw new RuntimeException("Invalid platform");
         }
