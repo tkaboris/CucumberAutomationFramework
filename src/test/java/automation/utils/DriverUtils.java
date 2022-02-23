@@ -59,7 +59,7 @@ public class DriverUtils {
         caps.setCapability("name", "My first test"); // test name
         caps.setCapability("build", "BStack Build Number 1"); // CI/CD job or build name
         try {
-            driver = new RemoteWebDriver(new URL(URL), caps);
+            driver = new RemoteWebDriver(new URL("http://google.com"), caps);// use this line
             //final WebDriver driver = new RemoteWebDriver(new URL("\"https://chiraq:\" + password +\"@hub-cloud.browserstack.comm), caps);
         } catch (MalformedURLException e) {
             e.printStackTrace();
